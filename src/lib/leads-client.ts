@@ -7,7 +7,7 @@ export type Search = Tables<"searches">;
 const PAGE = 1000;
 const MAX_ROWS = 5000;
 
-export async function fetchLeads(opts: { favorites?: boolean; searchId?: string } = {}): Promise<Lead[]> {
+export async function fetchLeads(opts: { favorites?: boolean | undefined; searchId?: string | undefined } = {}): Promise<Lead[]> {
   const all: Lead[] = [];
   for (let from = 0; from < MAX_ROWS; from += PAGE) {
     let q = supabase.from("leads").select("*").order("created_at", { ascending: false }).range(from, from + PAGE - 1);

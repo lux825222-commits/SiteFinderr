@@ -50,19 +50,19 @@ function ConfigPage() {
     setSavingName(true);
     const { error } = await supabase.from("profiles").update({ display_name: value || null }).eq("id", profile.id);
     setSavingName(false);
-    if (error) return toast.error("Não foi possível salvar.");
+    if (error) { toast.error("Não foi possível salvar."); return; }
     queryClient.invalidateQueries({ queryKey: ["profile"] });
     toast.success("Nome atualizado");
   }
 
   async function savePassword(e: FormEvent) {
     e.preventDefault();
-    if (next.length < 8) return toast.error("A nova senha precisa ter ao menos 8 caracteres.");
-    if (next !== confirm) return toast.error("As senhas não conferem.");
+    if (next.length < 8) { toast.error("A nova senha precisa ter ao menos 8 caracteres."); return; }
+    if (next !== confirm) { toast.error("As senhas não conferem."); return; }
     setSavingPw(true);
     const { error } = await supabase.auth.updateUser({ password: next, current_password: current } as never);
     setSavingPw(false);
-    if (error) return toast.error("Não foi possível alterar a senha. Confira a senha atual.");
+    if (error) { toast.error("Não foi possível alterar a senha. Confira a senha atual."); return; }
     setCurrent("");
     setNext("");
     setConfirm("");

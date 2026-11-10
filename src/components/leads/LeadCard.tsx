@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 
 interface Props {
   lead: Lead;
-  checking?: boolean;
+  checking?: boolean | undefined;
   onUpdate: (lead: Lead) => void;
   onRecheck: (ids: string[]) => void;
 }
