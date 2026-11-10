@@ -50,7 +50,8 @@ function AuthPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const goNext = () => navigate({ to: redirect ?? "/dashboard", replace: true });
+  const goNext = () =>
+    redirect ? navigate({ href: redirect, replace: true }) : navigate({ to: "/dashboard", replace: true });
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
