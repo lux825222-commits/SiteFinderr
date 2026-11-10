@@ -14,7 +14,11 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedAppRouteRouteImport } from './routes/_authenticated/_app/route'
 import { Route as AuthenticatedAppBuscarRouteImport } from './routes/_authenticated/_app/buscar'
+import { Route as AuthenticatedAppConfiguracoesRouteImport } from './routes/_authenticated/_app/configuracoes'
 import { Route as AuthenticatedAppDashboardRouteImport } from './routes/_authenticated/_app/dashboard'
+import { Route as AuthenticatedAppFavoritosRouteImport } from './routes/_authenticated/_app/favoritos'
+import { Route as AuthenticatedAppHistoricoRouteImport } from './routes/_authenticated/_app/historico'
+import { Route as AuthenticatedAppLeadsRouteImport } from './routes/_authenticated/_app/leads'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -39,24 +43,55 @@ const AuthenticatedAppBuscarRoute = AuthenticatedAppBuscarRouteImport.update({
   path: '/buscar',
   getParentRoute: () => AuthenticatedAppRouteRoute,
 } as any)
+const AuthenticatedAppConfiguracoesRoute =
+  AuthenticatedAppConfiguracoesRouteImport.update({
+    id: '/configuracoes',
+    path: '/configuracoes',
+    getParentRoute: () => AuthenticatedAppRouteRoute,
+  } as any)
 const AuthenticatedAppDashboardRoute =
   AuthenticatedAppDashboardRouteImport.update({
     id: '/dashboard',
     path: '/dashboard',
     getParentRoute: () => AuthenticatedAppRouteRoute,
   } as any)
+const AuthenticatedAppFavoritosRoute =
+  AuthenticatedAppFavoritosRouteImport.update({
+    id: '/favoritos',
+    path: '/favoritos',
+    getParentRoute: () => AuthenticatedAppRouteRoute,
+  } as any)
+const AuthenticatedAppHistoricoRoute =
+  AuthenticatedAppHistoricoRouteImport.update({
+    id: '/historico',
+    path: '/historico',
+    getParentRoute: () => AuthenticatedAppRouteRoute,
+  } as any)
+const AuthenticatedAppLeadsRoute = AuthenticatedAppLeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => AuthenticatedAppRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/buscar': typeof AuthenticatedAppBuscarRoute
+  '/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/dashboard': typeof AuthenticatedAppDashboardRoute
+  '/favoritos': typeof AuthenticatedAppFavoritosRoute
+  '/historico': typeof AuthenticatedAppHistoricoRoute
+  '/leads': typeof AuthenticatedAppLeadsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/buscar': typeof AuthenticatedAppBuscarRoute
+  '/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/dashboard': typeof AuthenticatedAppDashboardRoute
+  '/favoritos': typeof AuthenticatedAppFavoritosRoute
+  '/historico': typeof AuthenticatedAppHistoricoRoute
+  '/leads': typeof AuthenticatedAppLeadsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -65,13 +100,33 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/_app': typeof AuthenticatedAppRouteRouteWithChildren
   '/_authenticated/_app/buscar': typeof AuthenticatedAppBuscarRoute
+  '/_authenticated/_app/configuracoes': typeof AuthenticatedAppConfiguracoesRoute
   '/_authenticated/_app/dashboard': typeof AuthenticatedAppDashboardRoute
+  '/_authenticated/_app/favoritos': typeof AuthenticatedAppFavoritosRoute
+  '/_authenticated/_app/historico': typeof AuthenticatedAppHistoricoRoute
+  '/_authenticated/_app/leads': typeof AuthenticatedAppLeadsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/buscar' | '/dashboard'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/buscar'
+    | '/configuracoes'
+    | '/dashboard'
+    | '/favoritos'
+    | '/historico'
+    | '/leads'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/buscar' | '/dashboard'
+  to:
+    | '/'
+    | '/auth'
+    | '/buscar'
+    | '/configuracoes'
+    | '/dashboard'
+    | '/favoritos'
+    | '/historico'
+    | '/leads'
   id:
     | '__root__'
     | '/'
@@ -79,7 +134,11 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/_app'
     | '/_authenticated/_app/buscar'
+    | '/_authenticated/_app/configuracoes'
     | '/_authenticated/_app/dashboard'
+    | '/_authenticated/_app/favoritos'
+    | '/_authenticated/_app/historico'
+    | '/_authenticated/_app/leads'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -125,6 +184,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppBuscarRouteImport
       parentRoute: typeof AuthenticatedAppRouteRoute
     }
+    '/_authenticated/_app/configuracoes': {
+      id: '/_authenticated/_app/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/configuracoes'
+      preLoaderRoute: typeof AuthenticatedAppConfiguracoesRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
     '/_authenticated/_app/dashboard': {
       id: '/_authenticated/_app/dashboard'
       path: '/dashboard'
@@ -132,17 +198,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAppDashboardRouteImport
       parentRoute: typeof AuthenticatedAppRouteRoute
     }
+    '/_authenticated/_app/favoritos': {
+      id: '/_authenticated/_app/favoritos'
+      path: '/favoritos'
+      fullPath: '/favoritos'
+      preLoaderRoute: typeof AuthenticatedAppFavoritosRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
+    '/_authenticated/_app/historico': {
+      id: '/_authenticated/_app/historico'
+      path: '/historico'
+      fullPath: '/historico'
+      preLoaderRoute: typeof AuthenticatedAppHistoricoRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
+    '/_authenticated/_app/leads': {
+      id: '/_authenticated/_app/leads'
+      path: '/leads'
+      fullPath: '/leads'
+      preLoaderRoute: typeof AuthenticatedAppLeadsRouteImport
+      parentRoute: typeof AuthenticatedAppRouteRoute
+    }
   }
 }
 
 interface AuthenticatedAppRouteRouteChildren {
   AuthenticatedAppBuscarRoute: typeof AuthenticatedAppBuscarRoute
+  AuthenticatedAppConfiguracoesRoute: typeof AuthenticatedAppConfiguracoesRoute
   AuthenticatedAppDashboardRoute: typeof AuthenticatedAppDashboardRoute
+  AuthenticatedAppFavoritosRoute: typeof AuthenticatedAppFavoritosRoute
+  AuthenticatedAppHistoricoRoute: typeof AuthenticatedAppHistoricoRoute
+  AuthenticatedAppLeadsRoute: typeof AuthenticatedAppLeadsRoute
 }
 
 const AuthenticatedAppRouteRouteChildren: AuthenticatedAppRouteRouteChildren = {
   AuthenticatedAppBuscarRoute: AuthenticatedAppBuscarRoute,
+  AuthenticatedAppConfiguracoesRoute: AuthenticatedAppConfiguracoesRoute,
   AuthenticatedAppDashboardRoute: AuthenticatedAppDashboardRoute,
+  AuthenticatedAppFavoritosRoute: AuthenticatedAppFavoritosRoute,
+  AuthenticatedAppHistoricoRoute: AuthenticatedAppHistoricoRoute,
+  AuthenticatedAppLeadsRoute: AuthenticatedAppLeadsRoute,
 }
 
 const AuthenticatedAppRouteRouteWithChildren =
