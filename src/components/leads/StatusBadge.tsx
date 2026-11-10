@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { STATUS_META } from "@/lib/sitefinder";
 import type { SiteStatus } from "@/lib/site-status";
 
-export function StatusBadge({ status, checking }: { status: string; checking?: boolean }) {
+export function StatusBadge({ status, checking }: { status: string; checking?: boolean | undefined }) {
   const meta = STATUS_META[(checking ? "pendente" : status) as SiteStatus] ?? STATUS_META.verificar;
   return (
     <Badge variant={meta.variant} className="gap-1.5 whitespace-nowrap" title={meta.description}>

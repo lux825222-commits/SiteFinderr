@@ -64,7 +64,7 @@ export function LeadsBrowser({ leads, checkingIds, onUpdate, onRecheck, exportNa
   const pageItems = visible.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   async function doExport(kind: "csv" | "xlsx") {
-    if (!visible.length) return toast.error("Nenhum lead para exportar com os filtros atuais.");
+    if (!visible.length) { toast.error("Nenhum lead para exportar com os filtros atuais."); return; }
     try {
       if (kind === "csv") exportCsv(visible, exportName);
       else await exportExcel(visible, exportName);
@@ -77,7 +77,7 @@ export function LeadsBrowser({ leads, checkingIds, onUpdate, onRecheck, exportNa
 
   function recheckVisible() {
     const ids = visible.filter((l) => l.site_status !== "sem_site" && l.website).slice(0, MAX_BULK_RECHECK).map((l) => l.id);
-    if (!ids.length) return toast.info("Nenhum site para reverificar neste filtro.");
+    if (!ids.length) { toast.info("Nenhum site para reverificar neste filtro."); return; }
     toast.info(`Reverificando ${ids.length} site(s)…`);
     onRecheck(ids);
   }

@@ -19,22 +19,22 @@ import { MAX_SEGMENTS_PER_SEARCH, SEGMENTS, UFS } from "@/lib/sitefinder";
 import { cn } from "@/lib/utils";
 
 interface BuscarSearch {
-  segmentos?: string;
-  cidade?: string;
-  uf?: string;
-  bairro?: string;
-  cep?: string;
+  segmentos?: string | undefined;
+  cidade?: string | undefined;
+  uf?: string | undefined;
+  bairro?: string | undefined;
+  cep?: string | undefined;
 }
 
 const str = (v: unknown) => (typeof v === "string" && v.length < 300 ? v : undefined);
 
 export const Route = createFileRoute("/_authenticated/_app/buscar")({
   validateSearch: (s: Record<string, unknown>): BuscarSearch => ({
-    segmentos: str(s.segmentos),
-    cidade: str(s.cidade),
-    uf: str(s.uf),
-    bairro: str(s.bairro),
-    cep: str(s.cep),
+    segmentos: str(s['segmentos']),
+    cidade: str(s['cidade']),
+    uf: str(s['uf']),
+    bairro: str(s['bairro']),
+    cep: str(s['cep']),
   }),
   head: () => ({
     meta: [
@@ -105,10 +105,10 @@ function BuscarPage() {
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
-    if (!segments.length) return toast.error("Selecione ao menos um segmento.");
+    if (!segments.length) { toast.error("Selecione ao menos um segmento."); return; }
     if (!city.trim() && !postalCode.trim() && !neighborhood.trim())
-      return toast.error("Informe ao menos cidade, bairro ou CEP.");
-    if (postalCode && !/^\d{5}-?\d{3}$/.test(postalCode.trim())) return toast.error("CEP inválido. Use 00000-000.");
+      { toast.error("Informe ao menos cidade, bairro ou CEP."); return; }
+    if (postalCode && !/^\d{5}-?\d{3}$/.test(postalCode.trim())) { toast.error("CEP inválido. Use 00000-000."); return; }
     setSearching(true);
     try {
       const res = await start({ data: { segments, city, state, neighborhood, postalCode } });

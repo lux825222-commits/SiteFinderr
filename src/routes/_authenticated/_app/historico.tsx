@@ -32,7 +32,7 @@ function HistoricoPage() {
 
   async function remove(id: string) {
     const { error } = await supabase.from("searches").delete().eq("id", id);
-    if (error) return toast.error("Não foi possível excluir.");
+    if (error) { toast.error("Não foi possível excluir."); return; }
     queryClient.invalidateQueries({ queryKey: ["searches"] });
     queryClient.invalidateQueries({ queryKey: ["dashboard"] });
     toast.success("Pesquisa removida do histórico");

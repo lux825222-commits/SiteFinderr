@@ -9,8 +9,8 @@ import { useSiteChecker } from "@/hooks/use-site-checker";
 import { fetchLeads, type Lead } from "@/lib/leads-client";
 
 export const Route = createFileRoute("/_authenticated/_app/leads")({
-  validateSearch: (s: Record<string, unknown>): { busca?: string } => ({
-    busca: typeof s.busca === "string" && /^[0-9a-f-]{36}$/i.test(s.busca) ? s.busca : undefined,
+  validateSearch: (s: Record<string, unknown>): { busca?: string | undefined } => ({
+    busca: typeof s["busca"] === "string" && /^[0-9a-f-]{36}$/i.test(s["busca"]) ? s["busca"] : undefined,
   }),
   head: () => ({
     meta: [
