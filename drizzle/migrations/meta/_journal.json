@@ -15,6 +15,13 @@
       "when": 1794539349201,
       "tag": "0001_create_site_pages",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794539373639,
+      "tag": "0002_add_site_page_assets",
+      "breakpoints": true
     }
   ]
 }

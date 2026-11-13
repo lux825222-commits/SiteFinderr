@@ -159,6 +159,7 @@ export type Database = {
       }
       site_pages: {
         Row: {
+          assets: Json
           created_at: string
           details: Json
           html: string
@@ -170,6 +171,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          assets?: Json
           created_at?: string
           details?: Json
           html?: string
@@ -181,6 +183,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          assets?: Json
           created_at?: string
           details?: Json
           html?: string
