@@ -1,0 +1,2 @@
+ALTER TABLE public.site_pages ADD COLUMN assets jsonb NOT NULL DEFAULT '{}'::jsonb;
+COMMENT ON COLUMN public.site_pages.assets IS 'Map of image id to compressed data URL; HTML references images as sc-img:<id>.';
